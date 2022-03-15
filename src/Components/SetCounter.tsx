@@ -24,6 +24,7 @@ export const SetCounter = (props: PropsType) => {
             }
         console.log(props.valueOnSet)
     }
+    const disabling = props.startValue<0 || props.valueOnSet<0
 
     return (
         <div className="container">
@@ -45,7 +46,7 @@ export const SetCounter = (props: PropsType) => {
             </div>
             <div className="buttons">
                 <Button name="set" callback={test}
-                        disabled={1 !== 1}
+                        disabled={disabling}
                 />
 
             </div>
