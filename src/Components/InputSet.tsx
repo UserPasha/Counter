@@ -3,6 +3,7 @@ import React, {ChangeEvent, useState} from 'react';
 type PropsType ={
     valueOnSet: number
     setValueOnSet: (valueOnSet: number)=>void
+    disabling:boolean
 }
 
 export const InputSet = (props: PropsType) => {
@@ -13,7 +14,7 @@ export const InputSet = (props: PropsType) => {
     }
     return (
         <div>
-            <input className={props.valueOnSet<0 ?"errorInputStyle":"inputStyle" } type="number" value={props.valueOnSet} onChange={onchangeHandler}/>
+            <input className={props.disabling ?"errorInputStyle":"inputStyle" } type="number" value={props.valueOnSet} onChange={onchangeHandler}/>
 
         </div>
     );

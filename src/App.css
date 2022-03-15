@@ -88,3 +88,14 @@ width: 180px;
     border-radius: 10px;
     background-color: #b95454;
 }
+.errorMessage{
+    width: 350px;
+    height: 200px;
+    margin-top: 20px;
+    margin-left: 20px;
+    border: 3px solid rgb(0, 9, 10);
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    background-color: #b95454;
+}

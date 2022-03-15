@@ -14,6 +14,7 @@ function App() {
     let maxValue = valueOnSet
     const [counter, setCounter] = useState<number>(minValue)
 
+    const disabling = startValue<0 || valueOnSet<0 ||startValue >= valueOnSet
     /*    useEffect(() => {
             let valueAsString = localStorage.getItem("value")
             if (valueAsString) {
@@ -59,11 +60,15 @@ function App() {
                         setStartValue={setStartValue}
                         minValue={minValue}
                         maxValue={maxValue}
+                        engine={counter}
+                        setCounter={setCounter }
+                        disabling={disabling}
             />
             <NewCounter engine={counter}
                         setCounter={setCounter}
                         minValue={minValue}
                         maxValue={maxValue}
+                        disabling={disabling}
             />
         </div>
     );
