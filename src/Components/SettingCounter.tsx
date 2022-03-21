@@ -1,20 +1,22 @@
-import React from 'react';
+import React, {Dispatch, SetStateAction} from 'react';
 import {Button} from "./Button";
 import {InputSet} from "./InputSet";
 
 type PropsType = {
     valueOnSet: number
-    setValueOnSet:(valueOnSet: number)=> void
+    setValueOnSet: (valueOnSet: number) => void
     startValue: number
-    setStartValue: (startValue: number)=>void
+    setStartValue: (startValue: number) => void
     maxValue: number
-    minValue:number
+    minValue: number
     engine: number
     setCounter: (engine: number) => void
     disabling: boolean
+    blueBoard: boolean
+    setBlueBoard: (blueBoard: boolean) => void
 }
 
-export const SetCounter = (props: PropsType) => {
+export const SettingCounter = (props: PropsType) => {
     const test = () => {
         if (props.startValue) {
             let startToCounting = props.startValue
@@ -25,6 +27,7 @@ export const SetCounter = (props: PropsType) => {
             let maxToCounting = props.valueOnSet
             props.setValueOnSet(maxToCounting)
         }
+        props.setBlueBoard(false)
     }
     // const disabling = props.startValue<0 || props.valueOnSet<0 || props.startValue >= props.valueOnSet
 
@@ -36,13 +39,21 @@ export const SetCounter = (props: PropsType) => {
                         <div className="text">
                             max. value
                         </div>
-                        <InputSet  valueOnSet={props.valueOnSet} setValueOnSet={props.setValueOnSet} disabling={props.disabling}/>
+                        <InputSet valueOnSet={props.valueOnSet}
+                                  setValueOnSet={props.setValueOnSet}
+                                  disabling={props.disabling}
+                                  blueBoard={props.blueBoard}
+                                  setBlueBoard={props.setBlueBoard}/>
                     </div>
                     <div className="inputData">
                         <div className="text">
                             start. value
                         </div>
-                        <InputSet  valueOnSet={props.startValue} setValueOnSet={props.setStartValue} disabling={props.disabling}/>
+                        <InputSet valueOnSet={props.startValue}
+                                  setValueOnSet={props.setStartValue}
+                                  disabling={props.disabling}
+                                  blueBoard={props.blueBoard}
+                                  setBlueBoard={props.setBlueBoard}/>
                     </div>
                 </div>
             </div>
