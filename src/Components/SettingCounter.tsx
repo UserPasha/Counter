@@ -17,18 +17,22 @@ type PropsType = {
 }
 
 export const SettingCounter = (props: PropsType) => {
+    console.log(props.startValue === 0 || props.valueOnSet)
     const test = () => {
-        if (props.startValue) {
+        if (props.startValue === 0 || props.valueOnSet) {
             let startToCounting = props.startValue
             props.setStartValue(startToCounting)
             props.setCounter(props.startValue)
-        }
-        if (props.valueOnSet) {
             let maxToCounting = props.valueOnSet
             props.setValueOnSet(maxToCounting)
+            props.setBlueBoard(false)
+
+            localStorage.setItem("minValue", JSON.stringify(startToCounting));
+            localStorage.setItem("maxValue", JSON.stringify(maxToCounting));
         }
-        props.setBlueBoard(false)
     }
+
+
     // const disabling = props.startValue<0 || props.valueOnSet<0 || props.startValue >= props.valueOnSet
 
     return (
@@ -37,17 +41,18 @@ export const SettingCounter = (props: PropsType) => {
                 <div className="inputWrapper">
                     <div className="inputData">
                         <div className="text">
-                            max. value
+                            max.value
                         </div>
                         <InputSet valueOnSet={props.valueOnSet}
                                   setValueOnSet={props.setValueOnSet}
                                   disabling={props.disabling}
                                   blueBoard={props.blueBoard}
                                   setBlueBoard={props.setBlueBoard}/>
+
                     </div>
                     <div className="inputData">
                         <div className="text">
-                            start. value
+                            start.value
                         </div>
                         <InputSet valueOnSet={props.startValue}
                                   setValueOnSet={props.setStartValue}

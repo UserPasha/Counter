@@ -13,56 +13,21 @@ function App() {
     let maxValue = valueOnSet
     const [counter, setCounter] = useState<number>(minValue)
 
-    const [blueBoard, setBlueBoard]=useState<boolean>(true)
+    const [blueBoard, setBlueBoard] = useState<boolean>(true)
 
-
-    const disabling = startValue < 0 || valueOnSet < 0 || startValue >= valueOnSet
+    const disabling = startValue === 0 && valueOnSet === 0 ? false : startValue < 0 || valueOnSet < 0 || startValue >= valueOnSet
 
 
     useEffect(() => {
         let minValueAsString = localStorage.getItem("minValue")
-        if (minValueAsString) {
-            let newValue = JSON.parse(minValueAsString)
-            setStartValue(newValue);
-        }
-    }, [])
-    useEffect(() => {
         let maxValueAsString = localStorage.getItem("maxValue")
-        if (maxValueAsString) {
-            let newValue = JSON.parse(maxValueAsString)
-            setValueOnSet(newValue)
+        if (minValueAsString &&  maxValueAsString) {
+            setStartValue(+minValueAsString);
+            setValueOnSet(Number(maxValueAsString))
         }
     }, [])
+    
 
-    useEffect(() => {
-        localStorage.setItem("minValue", JSON.stringify(minValue));
-        localStorage.setItem("maxValue", JSON.stringify(maxValue));
-    }, [minValue, maxValue])
-
-    // const plus = () => {
-    //     setCounter(counter + 1)
-    // }
-    // const zero = () => {
-    //     setCounter(minValue)
-    // }
-    // const setLocal = () =>{
-    //     localStorage.setItem("value", JSON.stringify(counter))
-    //     localStorage.setItem("value+1", JSON.stringify(counter))
-    // }
-    // const getLocal = () => {
-    //     let valueAsString = localStorage.getItem("value")
-    //    if(valueAsString){
-    //        let newValue = JSON.parse(valueAsString)
-    //        setCounter(newValue)
-    //    }
-    // }
-    // const clearLocal = ()=>{
-    //    localStorage.clear()
-    //   setCounter(0)
-    // }
-    // const deleteItemLocal=()=>{
-    //     localStorage.removeItem("value+1")
-    // }
 
     return (
         <div className="wrapper">
@@ -84,12 +49,10 @@ function App() {
                         maxValue={maxValue}
                         disabling={disabling}
                         blueBoard={blueBoard}
-
             />
         </div>
     );
 }
 
 export default App;
-/*
-<div className={counter > 4 ? "error" : "wrapper"}>*/
+

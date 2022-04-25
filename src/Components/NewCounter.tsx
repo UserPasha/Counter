@@ -6,7 +6,7 @@ type PropsType = {
     engine: number
     setCounter: (engine: number) => void
     maxValue: number
-    minValue:number
+    minValue: number
     disabling: boolean
     blueBoard: boolean
 }
@@ -18,17 +18,14 @@ export const NewCounter = (props: PropsType) => {
     const resetValue = () => {
         props.setCounter(props.minValue)
     }
-    const disableForInc = props.engine>props.maxValue-1 || props.disabling
-    const disableForRes = props.engine===props.minValue || props.disabling
-
+    const disableForInc = props.engine > props.maxValue - 1 || props.disabling || props.blueBoard
+    const disableForRes = props.engine === props.minValue || props.disabling || props.blueBoard
 
     return (
-        <div  className="container">
+        <div className="container">
             <div className="board">
-                <Board engine={props.engine} maxValue={props.maxValue} disabling={props.disabling} blueBoard={props.blueBoard}/>
-                {/* <div className="counterField">
-                {counter}
-            </div>*/}
+                <Board engine={props.engine} maxValue={props.maxValue} disabling={props.disabling}
+                       blueBoard={props.blueBoard}/>
 
             </div>
             <div className="buttons">
