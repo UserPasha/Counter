@@ -1,13 +1,17 @@
 import React from 'react';
 
+
 type PropsType = {
     engine: number
+    minValue: number
     maxValue: number
     disabling: boolean
     blueBoard: boolean
 }
 
 export const Board = (props: PropsType) => {
+
+
     return (
         <>
             {props.disabling ? (
@@ -25,7 +29,7 @@ export const Board = (props: PropsType) => {
                     </div>
                 </div>
             ) : (
-                <div className={props.engine > props.maxValue - 1 ? "error" : "dataOnBoard"}>
+                <div className={props.engine> props.maxValue - 1 ? "error" : "dataOnBoard"}>
                     {props.engine}
                 </div>
             )}

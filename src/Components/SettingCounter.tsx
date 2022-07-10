@@ -1,34 +1,46 @@
-import React, {Dispatch, SetStateAction} from 'react';
+import React, {ChangeEvent, Dispatch, SetStateAction} from 'react';
 import {Button} from "./Button";
 import {InputSet} from "./InputSet";
+import {useDispatch} from "react-redux";
+import {installingCountDataAC, installingMaxDataAC, installingMinDataAC, toggleBoardAC} from "./counterReducer";
 
 type PropsType = {
     valueOnSet: number
-    setValueOnSet: (valueOnSet: number) => void
+    //setValueOnSet: (valueOnSet: number) => void
     startValue: number
-    setStartValue: (startValue: number) => void
-    maxValue: number
-    minValue: number
-    engine: number
-    setCounter: (engine: number) => void
+    //setStartValue: (startValue: number) => void
+    // maxValue: number
+    //  minValue: number
+    counter:number
+    //setCounter: (engine: number) => void
     disabling: boolean
     blueBoard: boolean
-    setBlueBoard: (blueBoard: boolean) => void
+    //setBlueBoard: (blueBoard: boolean) => void
 }
 
+
+
 export const SettingCounter = (props: PropsType) => {
-    console.log(props.startValue === 0 || props.valueOnSet)
-    const test = () => {
+
+
+    const dispatch = useDispatch()
+
+    // console.log(props.startValue === 0 || props.valueOnSet)
+    const install = () => {
         if (props.startValue === 0 || props.valueOnSet) {
             let startToCounting = props.startValue
-            props.setStartValue(startToCounting)
-            props.setCounter(props.startValue)
+            // props.setStartValue(startToCounting)
+            // props.setCounter(props.startValue)
+            dispatch(installingMinDataAC(startToCounting))
+            dispatch(installingCountDataAC(startToCounting))
             let maxToCounting = props.valueOnSet
-            props.setValueOnSet(maxToCounting)
-            props.setBlueBoard(false)
+            dispatch(installingMaxDataAC(maxToCounting))
+            // props.setValueOnSet(maxToCounting)
+            dispatch(toggleBoardAC(false))
+            //props.setBlueBoard(false)
 
-            localStorage.setItem("minValue", JSON.stringify(startToCounting));
-            localStorage.setItem("maxValue", JSON.stringify(maxToCounting));
+            // localStorage.setItem("minValue", JSON.stringify(startToCounting));
+            // localStorage.setItem("maxValue", JSON.stringify(maxToCounting));
         }
     }
 
@@ -43,27 +55,36 @@ export const SettingCounter = (props: PropsType) => {
                         <div className="text">
                             max.value
                         </div>
-                        <InputSet valueOnSet={props.valueOnSet}
-                                  setValueOnSet={props.setValueOnSet}
-                                  disabling={props.disabling}
-                                  blueBoard={props.blueBoard}
-                                  setBlueBoard={props.setBlueBoard}/>
+                        {/*<InputSet valueOnSet={props.valueOnSet}*/}
+                        {/*         // setValueOnSet={props.setValueOnSet}*/}
+                        {/*          disabling={props.disabling}*/}
 
+                        {/*         // setBlueBoard={props.setBlueBoard}/>*/}
+                        {/*          blueBoard={props.blueBoard}/>*/}
+                        <input type="number" className={props.disabling ?"errorInputStyle":"inputStyle" }
+                               value={props.valueOnSet} onChange={(e: ChangeEvent<HTMLInputElement>) =>{
+                            dispatch(installingMaxDataAC(+e.currentTarget.value));
+                            dispatch(toggleBoardAC(true))}}/>
                     </div>
                     <div className="inputData">
                         <div className="text">
                             start.value
                         </div>
-                        <InputSet valueOnSet={props.startValue}
-                                  setValueOnSet={props.setStartValue}
-                                  disabling={props.disabling}
-                                  blueBoard={props.blueBoard}
-                                  setBlueBoard={props.setBlueBoard}/>
+                        {/*<InputSet valueOnSet={props.startValue}*/}
+                        {/*          //setValueOnSet={props.setStartValue}*/}
+                        {/*          disabling={props.disabling}*/}
+
+                        {/*         // setBlueBoard={props.setBlueBoard}/>*/}
+                        {/*          blueBoard={props.blueBoard}/>*/}
+                        <input  type="number" className={props.disabling ?"errorInputStyle":"inputStyle" }
+                               value={props.startValue} onChange={(e: ChangeEvent<HTMLInputElement>) =>{
+                            dispatch(installingMinDataAC(+e.currentTarget.value))
+                            dispatch(toggleBoardAC(true))}} />
                     </div>
                 </div>
             </div>
             <div className="buttons">
-                <Button name="set" callback={test}
+                <Button name="set" callback={install}
                         disabled={props.disabling}
                 />
 
